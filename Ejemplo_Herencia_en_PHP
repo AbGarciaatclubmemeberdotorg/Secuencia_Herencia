@@ -1,0 +1,44 @@
+<?php
+interface Mammal
+{
+	public function eat();
+	public function speak ();
+}
+class Person implements Mammal {
+	public $name;
+	public $children = array ();
+	public function __construct ($name) {
+		$this->name = $name;
+	}
+	public function addChild (Person $person) {
+		$this->children[] = $person;
+	}
+	public function eat () {
+		// describe how to eat
+	}
+	public function speak () {
+		echo "My name is {$this->name}";
+	}
+}
+class ChildPerson extends Person {
+	// this is only in ChildPerson - not Person
+	public $favourite_toy;
+	public function __construct ($name, $favourite_toy) {
+		parent::__construct($name);
+		$this->favourite_toy = $favourite_toy;
+	}
+	public function speak () {
+		parent::speak();
+		echo ", and my favourite toy is: {$this->favourite_toy}";
+	}
+}
+$father = new Person("Father");
+$child = new ChildPerson("Clinton", "Roller coasters");
+$father->addChild($child);
+$father->speak();
+echo "\n\n\n";
+$child->speak();
+echo "\n\n\n";
+echo json_encode($father);
+
+php?>
